@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#7159C1</color>
+    <color name="colorPrimaryDark">#7159C1</color>
+    <color name="colorAccent">#7159C1</color>
+
+    <color name="text">#242424</color>
+    <color name="trasnparent">#00FFFFFF</color>
+    <color name="trasnparent_white">#6B000000</color>
+    <color name="dark">#C2C2C2</color>
+    <color name="white">#fff</color>
+    <color name="light_gray">#E9E8E8</color>
+    <color name="yellow">#FFC800</color>
+
+</resources>

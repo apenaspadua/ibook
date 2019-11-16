@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">iBook</string>
+
+    <string name="text_label_register">Cadastrar</string>
+    <string name="text_label_listboook">Meus livros</string>
+    <string name="text_label_description">Cadastre aqui seus livros para ler mais tarde</string>
+    <string name="text_question_book">Qual é o Livro?</string>
+    <string name="text_label_library">Biblioteca</string>
+
+    <string name="text_name_book">Nome do livro</string>
+    <string name="text_author_book">Autor(a)</string>
+    <string name="text_description_book">Descrição</string>
+    <string name="text_read_book">Já li :)</string>
+
+    <string name="text_form_empty">Preencha este campo</string>
+    <string name="text_form_save">Livro adicionado a biblioteca</string>
+    <string name="text_form_failed">Ocorreu um erro ao salvar</string>
+</resources>
