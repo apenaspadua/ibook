@@ -1,21 +1,22 @@
 package com.padua.ibook.ui.register;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.padua.ibook.R;
 import com.padua.ibook.application.MyApplication;
 import com.padua.ibook.model.Book;
+import com.padua.ibook.ui.BaseCreate;
 import com.padua.ibook.utils.Utils;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements BaseCreate {
 
     private EditText name, author, description;
     private TextInputLayout tilName, tilAuthor;
@@ -28,22 +29,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //Chamando a inicializao ao carregar tela
+        initInstance();
         initComponents();
-        book = Book.getInstance();
 
-        Utils.setPushDownAnimation(back);
         register.setOnClickListener(buttonClickRegister);
         back.setOnClickListener(backClick);
-    }
-
-    private void initComponents(){
-        name = findViewById(R.id.nameBook);
-        author = findViewById(R.id.authorBook);
-        description = findViewById(R.id.descriptionBook);
-        tilName = findViewById(R.id.tilName);
-        tilAuthor = findViewById(R.id.tilAuthor);
-        register = findViewById(R.id.register);
-        back = findViewById(R.id.back);
     }
 
     private View.OnClickListener backClick = new View.OnClickListener() {
@@ -104,5 +95,32 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void showMessage(String message){
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void initInstance() {
+        //Inicializando banco
+        book = Book.getInstance();
+    }
+
+    @Override
+    public void initComponents() {
+
+        try{
+            //Mapeando componentes
+            name = findViewById(R.id.nameBook);
+            author = findViewById(R.id.authorBook);
+            description = findViewById(R.id.descriptionBook);
+            tilName = findViewById(R.id.tilName);
+            tilAuthor = findViewById(R.id.tilAuthor);
+            register = findViewById(R.id.register);
+            back = findViewById(R.id.back);
+
+            //Atribuindo comportamento ao botao
+            Utils.setPushDownAnimation(back);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

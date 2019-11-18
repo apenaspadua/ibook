@@ -12,19 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.padua.ibook.R;
 import com.padua.ibook.database.Database;
-import com.padua.ibook.database.dao.BookDao;
 import com.padua.ibook.model.Book;
+import com.padua.ibook.ui.BaseCreate;
 import com.padua.ibook.ui.listbook.adapter.ListAdapter;
 import com.padua.ibook.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements BaseCreate {
 
     private ImageView back;
     private List<Book> bookList;
@@ -37,12 +35,10 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        db = Database.getInstance(this);
+        //Chamando a inicializao ao carregar tela
+        initInstance();
+        initComponents();
 
-        initializeComponents();
-        loadList();
-
-        Utils.setPushDownAnimation(back);
         back.setOnClickListener(backClick);
     }
 
@@ -52,13 +48,6 @@ public class ListActivity extends AppCompatActivity {
             onBackPressed();
         }
     };
-
-    private void initializeComponents(){
-        back = findViewById(R.id.back);
-        recyclerView = findViewById(R.id.recyclerbooks);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
 
     private void loadList(){
         bookList = new ArrayList<>();
@@ -72,5 +61,31 @@ public class ListActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
+    }
+
+    @Override
+    public void initInstance() {
+        //Inicializando banco
+        db = Database.getInstance(this);
+    }
+
+    @Override
+    public void initComponents(){
+        try{
+            //Mapeando componentes
+            back = findViewById(R.id.back);
+            recyclerView = findViewById(R.id.recyclerbooks);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            //Atribuindo comportamento ao botao
+            Utils.setPushDownAnimation(back);
+
+            //Carregar lista de livros
+            loadList();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
